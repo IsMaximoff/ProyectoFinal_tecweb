@@ -1,11 +1,11 @@
 // JSON BASE A MOSTRAR EN FORMULARIO
 var baseJSON = {
-    "precio": 0.0,
-    "unidades": 1,
-    "modelo": "XX-000",
-    "marca": "NA",
-    "detalles": "NA",
-    "imagen": "img/default.png"
+    "autor": "",
+    "departamento": "",
+    "empresa": "XX-000",
+    "fechaCreacion": "yyy-mm-dd",
+    "descripcion": "NA",
+    "archivo": "img/default.png"
   };
 
 $(document).ready(function(){
@@ -21,7 +21,7 @@ $(document).ready(function(){
             url: './backend/product-list.php',
             type: 'GET',
             success: function(response) {
-                console.log(response);
+                // console.log(response);
                 // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
                 const productos = JSON.parse(response);
             
@@ -33,11 +33,13 @@ $(document).ready(function(){
                     productos.forEach(producto => {
                         // SE CREA UNA LISTA HTML CON LA DESCRIPCIÓN DEL PRODUCTO
                         let descripcion = '';
-                        descripcion += '<li>precio: '+producto.precio+'</li>';
-                        descripcion += '<li>unidades: '+producto.unidades+'</li>';
-                        descripcion += '<li>modelo: '+producto.modelo+'</li>';
-                        descripcion += '<li>marca: '+producto.marca+'</li>';
-                        descripcion += '<li>detalles: '+producto.detalles+'</li>';
+                        descripcion += '<li>Autor: '+producto.autor+'</li>';
+                        descripcion += '<li>Departamento: '+producto.departamento+'</li>';
+                        descripcion += '<li>Empresa: '+producto.empresa+'</li>';
+                        descripcion += '<li>Fecha de creación: '+producto.fecha_creacion+'</li>';
+                        descripcion += '<li>Descripción: '+producto.descripcion+'</li>';
+                        descripcion += '<li>Archivo: '+producto.archivo+'</li>';
+
                     
                         template += `
                             <tr productId="${producto.id}">
@@ -80,11 +82,12 @@ $(document).ready(function(){
                             productos.forEach(producto => {
                                 // SE CREA UNA LISTA HTML CON LA DESCRIPCIÓN DEL PRODUCTO
                                 let descripcion = '';
-                                descripcion += '<li>precio: '+producto.precio+'</li>';
-                                descripcion += '<li>unidades: '+producto.unidades+'</li>';
-                                descripcion += '<li>modelo: '+producto.modelo+'</li>';
-                                descripcion += '<li>marca: '+producto.marca+'</li>';
-                                descripcion += '<li>detalles: '+producto.detalles+'</li>';
+                                descripcion += '<li>autor: '+producto.autor+'</li>';
+                                descripcion += '<li>departamento: '+producto.departamento+'</li>';
+                                descripcion += '<li>empresa: '+producto.empresa+'</li>';
+                                descripcion += '<li>Fecha de creación: '+producto.fecha_creacion+'</li>';
+                                descripcion += '<li>Descripción: '+producto.descripcion+'</li>';
+                                descripcion += '<li>Archivo: '+producto.archivo+'</li>';
                             
                                 template += `
                                     <tr productId="${producto.id}">
@@ -128,6 +131,7 @@ $(document).ready(function(){
         postData['nombre'] = $('#name').val();
         postData['id'] = $('#productId').val();
 
+        console.log(postData)
         /**
          * AQUÍ DEBES AGREGAR LAS VALIDACIONES DE LOS DATOS EN EL JSON
          * --> EN CASO DE NO HABER ERRORES, SE ENVIAR EL PRODUCTO A AGREGAR

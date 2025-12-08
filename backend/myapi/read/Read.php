@@ -14,7 +14,7 @@ class Read extends DataBase {
 
     public function list() {
         // SE REALIZA LA QUERY DE BÚSQUEDA Y AL MISMO TIEMPO SE VALIDA SI HUBO RESULTADOS
-        if ( $result = $this->conexion->query("SELECT * FROM productos WHERE eliminado = 0") ) {
+        if ( $result = $this->conexion->query("SELECT * FROM recursos WHERE eliminado = 0") ) {
             // SE OBTIENEN LOS RESULTADOS
             $rows = $result->fetch_all(MYSQLI_ASSOC);
 
@@ -37,7 +37,7 @@ class Read extends DataBase {
         // SE VERIFICA HABER RECIBIDO EL ID
         if( isset($search) ) {
             // SE REALIZA LA QUERY DE BÚSQUEDA Y AL MISMO TIEMPO SE VALIDA SI HUBO RESULTADOS
-            $sql = "SELECT * FROM productos WHERE (id = '{$search}' OR nombre LIKE '%{$search}%' OR marca LIKE '%{$search}%' OR detalles LIKE '%{$search}%') AND eliminado = 0";
+            $sql = "SELECT * FROM recursos WHERE (id = '{$search}' OR nombre LIKE '%{$search}%' OR autor LIKE '%{$search}%' OR empresa LIKE '%{$search}%') AND eliminado = 0";
             if ( $result = $this->conexion->query($sql) ) {
                 // SE OBTIENEN LOS RESULTADOS
                 $rows = $result->fetch_all(MYSQLI_ASSOC);
@@ -61,7 +61,7 @@ class Read extends DataBase {
     public function single($id) {
         if( isset($id) ) {
             // SE REALIZA LA QUERY DE BÚSQUEDA Y AL MISMO TIEMPO SE VALIDA SI HUBO RESULTADOS
-            if ( $result = $this->conexion->query("SELECT * FROM productos WHERE id = {$id}") ) {
+            if ( $result = $this->conexion->query("SELECT * FROM recursos WHERE id = {$id}") ) {
                 // SE OBTIENEN LOS RESULTADOS
                 $row = $result->fetch_assoc();
     
